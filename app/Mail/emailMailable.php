@@ -8,19 +8,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
-class TestMail extends Mailable
+class emailMailable extends Mailable
 {
     use Queueable, SerializesModels;
+    public $user;
     public function __construct()
     {
-        //
+        $this->user=Auth::user();
     }
-
     public function envelope()
     {
         return new Envelope(
-            subject: 'Test Mail',
+            subject: 'Email Mailable',
         );
     }
 
