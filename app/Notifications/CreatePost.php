@@ -10,9 +10,13 @@ use Illuminate\Notifications\Notification;
 class CreatePost extends Notification
 {
     use Queueable;
-    public function __construct()
+    private $post_id;
+    private $user_create;
+
+    public function __construct($post_id,$user_create)
     {
-        //
+       $this->post_id = $post_id;
+       $this->user_create = $user_create;
     }
 
     public function via($notifiable)
@@ -23,7 +27,8 @@ class CreatePost extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'post_id'=>$this->post_id,
+            'user_create'=> $this->user_create
         ];
     }
 }

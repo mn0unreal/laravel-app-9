@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\CreatePost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class PostController extends Controller
 {
@@ -20,7 +23,15 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
+        $post = Post::create([
+            'title'=>$request->title,
+            'body'=>$request->body,
+        ]);
+        $users = User::where('id','!=',auth()->user()->id)->get();
+        $user_create = auth()->user()->name;
+        Notification::send($users, new CreatePost($post->id,$user_create));
+
+        return redirect()->route('dashboard');
     }
 
     public function show(Post $post)
