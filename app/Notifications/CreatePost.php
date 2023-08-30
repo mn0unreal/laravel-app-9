@@ -17,9 +17,9 @@ class CreatePost extends Notification
 
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
-    
+
     public function toArray($notifiable)
     {
         return [
