@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+//use App\Events\WelcomeUser;
+use App\Events\WelcomeUser;
 use App\Http\Controllers\Controller;
+//use App\Mail\WelcomeUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -42,7 +45,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+//        event(new Registered($user));
+
+        if ($user){
+            event(new WelcomeUser($user));
+        }
 
         Auth::login($user);
 
