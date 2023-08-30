@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('posts',\App\Http\Controllers\PostController::class);
+Route::get('/notification/markAsRead', [PostController::class, 'markAllRead'])->name('notification.read');
+
+Route::resource('posts',PostController::class);
 
 
 require __DIR__.'/auth.php';
