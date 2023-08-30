@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Notifications\CreatePost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
 class PostController extends Controller
@@ -33,9 +34,13 @@ class PostController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function show(Post $post)
+    public function show( $id)
     {
-        //
+    $post = Post::FindorFail($id);
+    $getID = DB::table('notifications')->where('data->post_id',$id)->pluck('id');
+    DB::table('notifications')->where('id',$getID)->update(['read_at'=>now()]);
+
+    return $post;
     }
 
     public function edit(Post $post)
