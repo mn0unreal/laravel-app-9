@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 //Route::get('/users', function () {
 //    return 'status';
 //});
 
 Route::get('users',[\App\Http\Controllers\UserController::class,'index']);
+
+Route::get( 'sendmail', [\App\Http\Controllers\UserController::class, 'sendMail']);
