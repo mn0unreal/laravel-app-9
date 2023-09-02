@@ -2,47 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
+use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 //use \Illuminate\Http\UploadedFile;
 
 class UploadImage extends Controller
 {
+    use UploadImageTrait;
 public function showForm(){
 
     return view('upload');
 }
 
+//public function store(Request $request)
+//{
+//    return $this->UploadImage($request,'admins' );
+//}
 public function store(Request $request)
 {
-    $image = $request->file('photo')->getClientOriginalName();
-
-    $path = $request->file('photo')->storeAs('users',$image,'avatars');
-
-    return $path;
-}
-public function store2admins(Request $request)
-{
-    $image = $request->file('photo')->getClientOriginalName();
-
-    $path = $request->file('photo')->storeAs('admins',$image,'avatars');
-
-    return $path;
-}
-public function store2superadmin(Request $request)
-{
-    $image = $request->file('photo')->getClientOriginalName();
-
-    $path = $request->file('photo')->storeAs('superadmin',$image,'avatars');
-
-    return $path;
-}
-public function store2items(Request $request)
-{
-    $image = $request->file('photo')->getClientOriginalName();
-
-    $path = $request->file('photo')->storeAs('items',$image,'avatars');
-
-    return $path;
+//    $path = $this->UploadImage($request,'users' );
+    $path = $this->UploadImage($request,'admins' );
+    Image::create([
+        'path'=>$path
+    ]);
+    return 'uploaded';
 }
 
 }
