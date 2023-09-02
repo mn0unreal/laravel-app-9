@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-/* 
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-//    return view('welcome');
-    Storage::disk('local')->put('test.txt', 'welcome');
+//
+//    Storage::disk('local')->put('test.txt', 'welcome');
     return 'ok';
-
-
 });
+
+Route::get('show',[\App\Http\Controllers\UploadImage::class,'showForm']);
+
+Route::post('store',[\App\Http\Controllers\UploadImage::class,'store'])->name('photo.save');
