@@ -12,7 +12,7 @@ trait UploadImageTrait
     public function UploadImage(Request $request, $folderName)
     {
         $image = $request->file('photo')->getClientOriginalName();
-        $path = $request->file('photo')->storeAs($folderName,$image,'avatars');
+        $path = $request->file('photo')->storeAs($folderName,$image,'photos');
         return $path;
     }
 }

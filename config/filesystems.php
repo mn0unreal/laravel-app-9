@@ -29,7 +29,9 @@ return [
     */
 
     'disks' => [
-
+/* here is two type of path public_path and storage_path
+'root' => public_path for upload in public only without local storage
+ */
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -43,9 +45,10 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-        'avatars' => [
+
+        'photos' => [
             'driver' => 'local',
-            'root' => storage_path('img'),
+            'root' => public_path('imgs'), // 'imgs' this is folder name and 'public_path' this is public path only
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
@@ -78,6 +81,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+//        public_path('storage') => storage_path('imgs'), // to show this folder in public imgs
     ],
 
 ];

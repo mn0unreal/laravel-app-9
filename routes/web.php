@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-//
-//    Storage::disk('local')->put('test.txt', 'welcome');
+    Storage::disk('photos')->put('test.txt', 'welcome');
     return 'ok';
 });
 
 Route::get('show',[\App\Http\Controllers\UploadImage::class,'showForm']);
+Route::get('show/image',[\App\Http\Controllers\UploadImage::class,'index']);
 
 Route::post('store',[\App\Http\Controllers\UploadImage::class,'store'])->name('photo.save');
